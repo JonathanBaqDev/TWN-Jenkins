@@ -28,3 +28,13 @@ chmod +x <script_name>.sh
 - Hit Build Now and check the build console output
 - You can check configured jobs in the Docker container in */var/jenkins_home/jobs*
 - Fetched repositories will be in */var/jenkins_home/workspace*
+
+### Test and Build the applciation
+
+- Add an example unit test to the application (see [commit](https://github.com/JonathanBaqDev/TWN-Jenkins/commit/efde2ad338e7b90ece39d59f04c5e9d04d380db3))
+- On the job configuration > Build Steps, remove everything and add "Invoke top-level Maven targets"
+- Choose version (plugin configured in the *Tools* section)
+- Under Goals, add "test"
+- Add another step and add Goal "package"
+- Build and check console output - you should see outputs for the maven `test` and `package` commands
+- The application *.jar* can be found in */var/jenkins_home/workspace/<job_name>/target*
