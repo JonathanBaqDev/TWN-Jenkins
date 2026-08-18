@@ -3,7 +3,11 @@ Reference project: https://gitlab.com/twn-devops-bootcamp/latest/08-jenkins/java
 
 Building a CI/CD pipeline on Jenkins for a Java application.
 
-## Install Jenkins on a server as a Docker container
+After following the base setup for Jenkins on the server below, check out info on specific branches linked here:
+
+- [*freestyle-project*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/freestyle-project/Info/freestyle-project.md)
+
+### Install Jenkins on a server as a Docker container
 
 * **Configure the server firewall**
 
@@ -75,6 +79,7 @@ Build tools can be made available to Jenkins by either adding plugins or install
 
 ### Jenkins Tools and Plugins
 
+- The Maven plugin is installed by default 
 - Go to *Manage Jenkins* > *Tools*
 - Add Maven Installation > Latest version > Install from Apache
 - Install Stage View plugin to have a better view of the pipeline build progress - restart the container if the installation seems stuck
