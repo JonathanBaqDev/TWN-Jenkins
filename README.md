@@ -5,7 +5,8 @@ Building a CI/CD pipeline on Jenkins for a Java application.
 
 After following the base setup for Jenkins on the server below, check out info on specific branches linked here:
 
-- [*freestyle-project*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/freestyle-project/Info/freestyle-project.md)
+- [*freestyle-project*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/freestyle-project/Info/freestyle-project.md) - Jenkins job that checks-out Git repo > Run tests > Builds jar file 
+- [*jenkins-docker*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/jenkins-docker/Info/jenkins-docker.md) - Expanding the freestyle job to Build Docker Image > Push image to Docker Hub and to a private Nexus docker repository
 
 ### Install Jenkins on a server as a Docker container
 
