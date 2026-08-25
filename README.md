@@ -7,6 +7,7 @@ After following the base setup for Jenkins on the server below, check out info o
 
 - [*freestyle-project*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/freestyle-project/Info/freestyle-project.md) - Jenkins job that checks-out Git repo > Run tests > Builds jar file 
 - [*jenkins-docker*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/jenkins-docker/Info/jenkins-docker.md) - Expanding the freestyle job to Build Docker Image > Push image to Docker Hub and to a private Nexus docker repository
+- [*jenkins-pipeline*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/jenkins-pipeline/Info/jenkins-pipeline.md) - Defining a Jenkinsfile and creating a pipeline vs a freestyle job
 
 ### Install Jenkins on a server as a Docker container
 
