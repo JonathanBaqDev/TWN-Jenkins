@@ -119,3 +119,7 @@ stage("deploy") {
     }
 }
 ```
+### Push to Dockerhub from pipeline
+
+- Configure your Jenkinsfile to build the application and push the image to your Dockerhub repository.
+- See commit: [Configure pipeline push to Dockerhub repo](https://github.com/JonathanBaqDev/TWN-Jenkins/commit/c8784019358fcc24912ff42adca7b5f7a7a43a5c)
