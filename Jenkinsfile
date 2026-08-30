@@ -10,10 +10,23 @@ pipeline {
             steps {
                 script {
                     gv = load "script.groovy"
+                    echo "Script loaded, building the application from branch ${BRANCH_NAME}"
+                }
+            }
+        }
+        stage ("test") {
+            steps {
+                script {
+                    gv.test()
                 }
             }
         }
         stage("build jar") {
+            when {
+                expression {
+                    BRANCH_NAME == 'multibranch-pipeline'
+                }
+            }
             steps {
                 script {
                     gv.buildJar()
@@ -22,6 +35,11 @@ pipeline {
         }
 
         stage("build image") {
+            when {
+                expression {
+                    BRANCH_NAME == 'multibranch-pipeline'
+                }
+            }
             steps {
                 script {
                     gv.buildImage()
@@ -30,6 +48,11 @@ pipeline {
         }
 
         stage("deploy") {
+            when {
+                expression {
+                    BRANCH_NAME == 'multibranch-pipeline'
+                }
+            }
             steps {
                 script {
                     gv.deployApp()
