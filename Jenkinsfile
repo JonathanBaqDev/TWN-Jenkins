@@ -1,3 +1,4 @@
+@Library('jenkins-shared-library')
 def gv
 
 pipeline {   
@@ -24,12 +25,12 @@ pipeline {
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-pipeline'
+                    BRANCH_NAME == 'multibranch-sharedlib' 
                 }
             }
             steps {
                 script {
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
@@ -37,12 +38,12 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-pipeline'
+                    BRANCH_NAME == 'multibranch-sharedlib' 
                 }
             }
             steps {
                 script {
-                    gv.buildImage()
+                    buildImage()
                 }
             }
         }
@@ -50,7 +51,7 @@ pipeline {
         stage("deploy") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-pipeline'
+                    BRANCH_NAME == 'multibranch-sharedlib'
                 }
             }
             steps {

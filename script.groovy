@@ -3,6 +3,9 @@ def test() {
     sh 'mvn test'
 }
 
+/* 
+* Moved to Jenkins shared library
+*
 def buildJar() {
     echo 'building the application...'
     sh 'mvn package'
@@ -19,7 +22,8 @@ def buildImage() {
                 sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
                 sh 'docker push jbaquirindev/twn-demo:jma-2.0'
     }
-}
+} 
+*/
 
 def deployApp() {
     echo 'deploying the application...'
