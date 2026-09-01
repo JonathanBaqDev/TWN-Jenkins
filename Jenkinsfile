@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage("build image") {
+        stage("build and push image") {
             when {
                 expression {
                     BRANCH_NAME == 'multibranch-sharedlib' 
@@ -43,7 +43,11 @@ pipeline {
             }
             steps {
                 script {
-                    buildImage('jbaquirindev/twn-demo:jma-3.0')
+                    def imageName = 'jbaquirindev/twn-demo:jma-3.0'
+
+                    buildImage(imageName)
+                    dockerLogin()
+                    dockerPush(imageName)
                 }
             }
         }
