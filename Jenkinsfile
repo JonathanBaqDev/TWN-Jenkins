@@ -43,7 +43,7 @@ pipeline {
             }
             steps {
                 script {
-                    buildImage()
+                    buildImage('jbaquirindev/twn-demo:jma-3.0')
                 }
             }
         }
