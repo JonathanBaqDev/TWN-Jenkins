@@ -1,4 +1,15 @@
-@Library('jenkins-shared-library')
+
+// Import global library configured in Jenkins
+//@Library('jenkins-shared-library')
+
+// Import to be project scoped vs global
+library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+        remote: 'https://github.com/JonathanBaqDev/TWN-Jenkins-Shared-Library.git',
+        credentialsId: 'github-creds'
+    ]
+)
+
 def gv
 
 pipeline {   
@@ -43,7 +54,7 @@ pipeline {
             }
             steps {
                 script {
-                    def imageName = 'jbaquirindev/twn-demo:jma-3.0'
+                    def imageName = 'jbaquirindev/twn-demo:jma-4.0'
 
                     buildImage(imageName)
                     dockerLogin()
