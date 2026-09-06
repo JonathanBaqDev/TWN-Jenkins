@@ -10,6 +10,8 @@ After following the base setup for Jenkins on the server below, check out info o
 - [*jenkins-pipeline*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/jenkins-pipeline/Info/jenkins-pipeline.md) - Defining a Jenkinsfile and creating a pipeline vs a freestyle job
 - [*multibranch-pipeline*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/multibranch-test/Info/multibranch-pipeline.md) - Configuring different build conditions and actions for multiple branches
 
+- [*multibranch-webhooks*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/multibranch-webhooks/Info/multibranch-webhooks.md) - Trigger builds when commits are pushed to a repository
+
 ### Install Jenkins on a server as a Docker container
 
 * **Configure the server firewall**
