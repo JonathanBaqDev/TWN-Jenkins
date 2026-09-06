@@ -40,6 +40,10 @@ pipeline {
                     sh 'mvn build-helper:parse-version versions:set \
                         -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
                         versions:commit'
+                    def versionMatcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                    def version = versionMatcher[0][1]
+                    // BUILD_NUMBER is a Jenkins environment variable that increments with each build
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                 }
             }
         }
@@ -47,7 +51,7 @@ pipeline {
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-sharedlib' 
+                    BRANCH_NAME == 'multibranch-versioning' 
                 }
             }
             steps {
@@ -60,12 +64,13 @@ pipeline {
         stage("build and push image") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-sharedlib' 
+                    BRANCH_NAME == 'multibranch-versioning' 
                 }
             }
             steps {
                 script {
-                    def imageName = 'jbaquirindev/twn-demo:jma-4.0'
+                    def dockerRepo = 'jbaquirindev/twn-demo'
+                    def imageName = "${dockerRepo}:${env.IMAGE_NAME}"
 
                     buildImage(imageName)
                     dockerLogin()
@@ -77,7 +82,7 @@ pipeline {
         stage("deploy") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-sharedlib'
+                    BRANCH_NAME == 'multibranch-versioning'
                 }
             }
             steps {
