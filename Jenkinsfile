@@ -90,6 +90,14 @@ pipeline {
                     gv.deployApp()
                 }
             }
+        }
+
+        stage('commit version update') {
+            steps {
+                script {
+                    gitPush('multibranch-versioning', 'github.com/JonathanBaqDev/TWN-Jenkins.git')
+                }
+            }
         }               
     }
 } 
