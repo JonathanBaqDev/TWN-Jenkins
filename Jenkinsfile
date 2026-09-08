@@ -93,6 +93,11 @@ pipeline {
         }
 
         stage('commit version update') {
+            when {
+                expression {
+                    BRANCH_NAME == 'multibranch-versioning'
+                }
+            }
             steps {
                 script {
                     gitPush('multibranch-versioning', 'github.com/JonathanBaqDev/TWN-Jenkins.git')
