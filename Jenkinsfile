@@ -51,7 +51,7 @@ pipeline {
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-versioning' 
+                    BRANCH_NAME == 'multibranch-AWS' 
                 }
             }
             steps {
@@ -64,7 +64,7 @@ pipeline {
         stage("build and push image") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-versioning' 
+                    BRANCH_NAME == 'multibranch-AWS' 
                 }
             }
             steps {
@@ -82,7 +82,7 @@ pipeline {
         stage("deploy") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-versioning'
+                    BRANCH_NAME == 'multibranch-AWS'
                 }
             }
             steps {
@@ -95,12 +95,12 @@ pipeline {
         stage('commit version update') {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-versioning'
+                    BRANCH_NAME == 'multibranch-AWS'
                 }
             }
             steps {
                 script {
-                    gitPush('multibranch-versioning', 'github.com/JonathanBaqDev/TWN-Jenkins.git')
+                    gitPush('multibranch-AWS', 'github.com/JonathanBaqDev/TWN-Jenkins.git')
                 }
             }
         }               
