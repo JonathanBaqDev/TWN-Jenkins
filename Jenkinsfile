@@ -14,9 +14,17 @@ def gv
 
 pipeline {   
     agent any
+
+    environment {
+        IMAGE_TAG = ''
+        DOCKERHUB_REPO = 'jbaquirindev/twn-demo'
+        IMAGE_NAME = ''
+    }
+
     tools {
         maven 'maven-3.9'
     }
+
     stages {
         stage("init") {
             steps {
@@ -43,7 +51,8 @@ pipeline {
                     def versionMatcher = readFile('pom.xml') =~ '<version>(.+)</version>'
                     def version = versionMatcher[0][1]
                     // BUILD_NUMBER is a Jenkins environment variable that increments with each build
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    env.IMAGE_TAG = "$version-$BUILD_NUMBER"
+                    env.IMAGE_NAME = "${env.DOCKERHUB_REPO}:${env.IMAGE_TAG}"
                 }
             }
         }
@@ -69,8 +78,7 @@ pipeline {
             }
             steps {
                 script {
-                    def dockerRepo = 'jbaquirindev/twn-demo'
-                    def imageName = "${dockerRepo}:${env.IMAGE_NAME}"
+                    def imageName = env.IMAGE_NAME
 
                     buildImage(imageName)
                     dockerLogin()
@@ -87,7 +95,7 @@ pipeline {
             }
             steps {
                 script {
-                    gv.deployApp()
+                    gv.deployApp(env.IMAGE_NAME)
                 }
             }
         }

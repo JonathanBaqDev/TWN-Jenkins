@@ -1,0 +1,13 @@
+version: '5.5'
+services:
+  java-maven-app:
+  # adjust for automatically incremented version number
+    image: jbaquirindev/twn-demo:${IMAGE_NAME:?IMAGE_NAME is required}
+    ports:
+      - "8080:8080"
+  postgres:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=<use_env_file_for_local_password>

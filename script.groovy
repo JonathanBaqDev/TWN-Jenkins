@@ -26,10 +26,11 @@ def buildImage() {
 } 
 */
 
-def deployApp() {
+def deployApp(string imageName) {
     echo 'deploying the application...'
+
     sshagent(['ec2-server-key']) {
-        def imageName = 'jbaquirindev/twn-demo:1.1.2-8'
+       
         def dockerRun = "docker run -d -p 8080:8080 ${imageName}"
         
         withCredentials([usernamePassword(
