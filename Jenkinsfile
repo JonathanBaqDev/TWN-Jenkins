@@ -19,6 +19,7 @@ pipeline {
         IMAGE_TAG = ''
         DOCKERHUB_REPO = 'jbaquirindev/twn-demo'
         IMAGE_NAME = ''
+        CURRENT_BRANCH = "multibranch-AWS-compose"
     }
 
     tools {
@@ -60,7 +61,7 @@ pipeline {
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-AWS' 
+                    BRANCH_NAME == "env.CURRENT_BRANCH" 
                 }
             }
             steps {
@@ -73,7 +74,7 @@ pipeline {
         stage("build and push image") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-AWS' 
+                    BRANCH_NAME == "env.CURRENT_BRANCH" 
                 }
             }
             steps {
@@ -90,12 +91,12 @@ pipeline {
         stage("deploy") {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-AWS'
+                    BRANCH_NAME == "env.CURRENT_BRANCH"
                 }
             }
             steps {
                 script {
-                    gv.deployApp(env.IMAGE_NAME)
+                    gv.deployApp()
                 }
             }
         }
@@ -103,12 +104,12 @@ pipeline {
         stage('commit version update') {
             when {
                 expression {
-                    BRANCH_NAME == 'multibranch-AWS'
+                    BRANCH_NAME == "env.CURRENT_BRANCH"
                 }
             }
             steps {
                 script {
-                    gitPush('multibranch-AWS', 'github.com/JonathanBaqDev/TWN-Jenkins.git')
+                    gitPush("env.CURRENT_BRANCH", 'github.com/JonathanBaqDev/TWN-Jenkins.git')
                 }
             }
         }               

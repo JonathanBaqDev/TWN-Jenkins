@@ -26,12 +26,14 @@ def buildImage() {
 } 
 */
 
-def deployApp(string imageName) {
+def deployApp() {
     echo 'deploying the application...'
 
     sshagent(['ec2-server-key']) {
        
-        def dockerRun = "docker run -d -p 8080:8080 ${imageName}"
+        def dockerComposeCmd = "docker-compose -f docker-compose.yml up -d"
+
+        sh "scp docker-compose.yml ec2-user@<EC2_INSTANCE_PUBLIC_IP>:/home/ec2-user"
         
         withCredentials([usernamePassword(
             credentialsId: 'dockerhub-repo',
@@ -42,7 +44,7 @@ def deployApp(string imageName) {
                 set -e
                     printf '%s' "\$PASSWORD" | ssh -o StrictHostKeyChecking=no \\
                         ec2-user@<EC2_INSTANCE_PUBLIC_IP> \\
-                        "docker login --username '\$USERNAME' --password-stdin && docker pull ${imageName} && ${dockerRun}"
+                        "docker login --username '\$USERNAME' --password-stdin && ${dockerComposeCmd}"
             """
         }
     }
