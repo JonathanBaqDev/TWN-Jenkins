@@ -2,7 +2,7 @@ version: '5.5'
 services:
   java-maven-app:
   # adjust for automatically incremented version number
-    image: jbaquirindev/twn-demo:${IMAGE_NAME:?IMAGE_NAME is required}
+    image: ${IMAGE_NAME:?IMAGE_NAME is required}
     ports:
       - "8080:8080"
   postgres:

@@ -96,7 +96,7 @@ pipeline {
             }
             steps {
                 script {
-                    gv.deployApp()
+                    gv.deployApp(env.IMAGE_NAME)
                 }
             }
         }

@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+
 def test() {
     echo 'running the tests...'
     sh 'mvn test'
@@ -26,14 +27,17 @@ def buildImage() {
 } 
 */
 
-def deployApp() {
+def deployApp(String imageName) {
     echo 'deploying the application...'
 
     sshagent(['ec2-server-key']) {
        
-        def dockerComposeCmd = "docker-compose -f docker-compose.yml up -d"
+        def shellCmd = "bash ./deploy-cmds.sh ${imageName}"
+        def remoteHost = "ec2-user@<EC2_INSTANCE_PUBLIC_IP>"
+        def copyDestination = "${remoteHost}:/home/ec2-user"
 
-        sh "scp docker-compose.yml ec2-user@<EC2_INSTANCE_PUBLIC_IP>:/home/ec2-user"
+        sh "scp docker-compose.yaml ${copyDestination}"
+        sh "scp deploy-cmds.sh ${copyDestination}"
         
         withCredentials([usernamePassword(
             credentialsId: 'dockerhub-repo',
@@ -43,8 +47,8 @@ def deployApp() {
             sh """
                 set -e
                     printf '%s' "\$PASSWORD" | ssh -o StrictHostKeyChecking=no \\
-                        ec2-user@<EC2_INSTANCE_PUBLIC_IP> \\
-                        "docker login --username '\$USERNAME' --password-stdin && ${dockerComposeCmd}"
+                        ${remoteHost} \\
+                        "docker login --username '\$USERNAME' --password-stdin && ${shellCmd}"
             """
         }
     }
