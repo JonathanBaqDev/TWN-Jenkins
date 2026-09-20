@@ -11,6 +11,8 @@ After following the base setup for Jenkins on the server below, check out info o
 - [*multibranch-pipeline*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/multibranch-test/Info/multibranch-pipeline.md) - Configuring different build conditions and actions for multiple branches
 - [*multibranch-webhooks*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/multibranch-webhooks/Info/multibranch-webhooks.md) - Trigger builds when commits are pushed to a repository
 - [*multibranch-versioning*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/multibranch-versioning/Info/multibranch-versioning.md) - Automatically increment app and Docker image versions
+- [*multibranch-AWS*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/multibranch-AWS-compose/Info/multibranch-AWS.md) - Deploy app from Jenkins to AWS EC2
+- [*multibranch-AWS-compose*](https://github.com/JonathanBaqDev/TWN-Jenkins/blob/multibranch-AWS-compose/Info/multibranch-AWS-compose.md) - Deploy app to EC2 using Docker Compose
 
 ### Install Jenkins on a server as a Docker container
 
